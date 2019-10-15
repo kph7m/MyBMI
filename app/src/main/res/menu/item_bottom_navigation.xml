@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 不要なファイル　あとで消すこと！-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+    android:id="@+id/inputTab"
+    android:icon="@drawable/ic_input_tab"
+    android:title="@string/text_titleInputTab"/>
+
+    <item
+        android:id="@+id/historyTab"
+        android:icon="@drawable/ic_history_tab"
+        android:title="@string/text_titleHistoryTab"/>
+
+</menu>

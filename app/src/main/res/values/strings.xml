@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">MyBMI</string>
+    <string name="text_operationExplanation">身長と体重を入力してください</string>
+    <string name="text_inputView_title">入力</string>
+    <string name="text_textHeight">身長</string>
+    <string name="text_textWeight">体重</string>
+    <string name="text_unitHeight">cm</string>
+    <string name="text_unitWeight">kg</string>
+    <string name="text_buttonBMICalculate">BMIを計算する</string>
+    <string name="text_titleInputTab">入力</string>
+    <string name="text_titleHistoryTab">履歴</string>
+    <string name="text_buttonSave">保存する</string>
+    <string name="text_buttonDelete">削除</string>
+    <string name="text_textYourBMI1">あなたのBMIは</string>
+    <string name="text_textYourBMI2">でした</string>
+    <string name="text_defaultYurBMI">20.0</string>
+    <string name="hint_inputExcuse">言い訳を書きたければ書いてください</string>
+</resources>
