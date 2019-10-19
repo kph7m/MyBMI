@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBMICalculate" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonCalculateBMI" />
 
     <EditText
         android:id="@+id/inputWeight"
@@ -166,7 +166,7 @@
         app:layout_constraintStart_toEndOf="@+id/inputWeight" />
 
     <Button
-        android:id="@+id/buttonBMICalculate"
+        android:id="@+id/buttonCalculateBMI"
         android:layout_width="350dp"
         android:layout_height="100dp"
         android:layout_marginTop="24dp"
@@ -195,12 +195,12 @@
         android:id="@+id/buttonDelete"
         android:layout_width="@dimen/input_status_width"
         android:layout_height="@dimen/input_status_height"
+        android:layout_marginTop="16dp"
         android:background="@drawable/white_circle_square"
         android:text="@string/text_buttonDelete"
         android:textAlignment="center"
         android:textColor="@color/colorBlack"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tab"
         app:layout_constraintStart_toStartOf="@+id/inputExcuse"
         app:layout_constraintTop_toBottomOf="@+id/inputExcuse" />
 
