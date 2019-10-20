@@ -1,12 +1,17 @@
 package com.example.mybmi
 
 import android.app.Activity
+import android.app.PendingIntent.getActivity
+import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.core.content.edit
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_input.*
 import java.text.SimpleDateFormat
@@ -22,37 +27,48 @@ class MainActivity : FragmentActivity() {
         setContentView(R.layout.activity_main)
 
 
-        //INPUT項目の初期値登録
-        val pref = PreferenceManager.getDefaultSharedPreferences(this)
-        val inputDate:String = SimpleDateFormat("yyyyMMdd").format(Date())
-        inputHeight.setText(pref.getString(inputDate+"Height",""))
-        inputWeight.setText(pref.getString(inputDate+"Weight",""))
-        inputExcuse.setText(pref.getString(inputDate+"Excuse",""))
-        //yourBMI.setText((round((weight/(height/100)/(height/100)*10))/10).toString())
+        //タブの処理追加
+        viewPager.adapter =PagerAdapter(supportFragmentManager, this)
+        tab.setupWithViewPager(viewPager)
 
-        //ボタン処理追加
-        buttonCalculateBMI.setOnClickListener { calculateBMI() }
-        buttonSave.setOnClickListener { save() }
-    }
-
-    //BMIの計算・保存処理
-    private fun calculateBMI() {
-        val height:Double = inputHeight.text.toString().toDouble()
-        val weight:Double = inputWeight.text.toString().toDouble()
-        this.yourBMI.text = (round((weight/(height/100)/(height/100)*10))/10).toString()
-
-        save()
-    }
-
-    //保存処理
-    private fun save(){
-        val pref = PreferenceManager.getDefaultSharedPreferences(this)
-
-        pref.edit {
-            val inputDate:String = SimpleDateFormat("yyyyMMdd").format(Date())
-            putString(inputDate+"Height",inputHeight.text.toString())
-            putString(inputDate+"Weight",inputWeight.text.toString())
-            putString(inputDate+"Excuse",inputExcuse.text.toString())
+        //タブのレイアウト追加
+        tab.getTabAt(0)?.also {
+            it.setText(R.string.text_titleInputTab)
+            it.setIcon(R.drawable.ic_input_tab)
         }
+        tab.getTabAt(1)?.also {
+            it.setText(R.string.text_titleHistoryTab)
+            it.setIcon(R.drawable.ic_history_tab)
+        }
+    }
+
+
+//
+//    //Fragmentの表示処理
+//    private fun viewFragment(fragment: Fragment){
+//        val fragmentListener = this.supportFragmentManager
+//        val fragmentTransaction = this.supportFragmentManager.beginTransaction()
+//        fragmentTransaction.replace(R.id.container,fragment).addToBackStack(null).commit()
+//    }
+}
+
+class PagerAdapter(fm: FragmentManager, context: Context) : FragmentPagerAdapter(fm) {
+
+    override fun getItem(position: Int): Fragment {
+        when (position) {
+            0 -> {
+                return InputFragment()
+            }
+            1 -> {
+                return HistoryFragment()
+            }
+            else -> {
+                return InputFragment()
+            }
+        }
+    }
+
+    override fun getCount(): Int {
+        return 2
     }
 }

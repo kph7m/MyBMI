@@ -7,13 +7,22 @@
     tools:context=".MainActivity">
 
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.viewpager.widget.ViewPager>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:tabBackground="@color/colorLightGray">
 
@@ -31,15 +40,6 @@
             android:icon="@drawable/ic_history_tab"
             android:text="@string/text_titleHistoryTab" />
     </com.google.android.material.tabs.TabLayout>
-
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.example.mybmi.InputFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_input" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
