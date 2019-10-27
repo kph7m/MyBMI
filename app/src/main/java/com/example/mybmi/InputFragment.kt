@@ -1,6 +1,7 @@
 package com.example.mybmi
 
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -37,20 +38,44 @@ class InputFragment : Fragment() {
         inputHeight.setText(pref.getString(inputDate+"Height",""))
         inputWeight.setText(pref.getString(inputDate+"Weight",""))
         inputExcuse.setText(pref.getString(inputDate+"Excuse",""))
-        //yourBMI.setText((round((weight/(height/100)/(height/100)*10))/10).toString())
+        if(!pref.getString(inputDate+"Height","").isNullOrEmpty()) {
+            this.yourBMI.text = calculateBMI()
+        }
 
         //ボタン押下時の処理追加
-        buttonCalculateBMI.setOnClickListener { calculateBMI() }
+        buttonCalculateBMI.setOnClickListener { this.yourBMI.text = calculateBMI() }
         buttonSave.setOnClickListener { save() }
+        buttonDelete.setOnClickListener { delete() }
     }
 
-    //BMIの計算・保存処理
-    private fun calculateBMI() {
-        val height:Double = inputHeight.text.toString().toDouble()
-        val weight:Double = inputWeight.text.toString().toDouble()
-        this.yourBMI.text = (round((weight/(height/100)/(height/100)*10)) /10).toString()
+    //BMIの計算
+    private fun calculateBMI():String {
+        var bmi = ""
+        try {
+            val height: Double = inputHeight.text.toString().toDouble()
+            val weight: Double = inputWeight.text.toString().toDouble()
+            if(numberDecimalPlaces(height)>1 || numberDecimalPlaces(weight)>1 ){
+                AlertDialog.Builder(context)
+                    .setMessage(getString(R.string.alert_numberDecimalPlaces))
+                    .show()
+                return bmi
+            }
+            bmi = (round((weight / (height / 100) / (height / 100) * 10)) / 10).toString()
+        }catch(e:Exception){
+            AlertDialog.Builder(context)
+                .setMessage(getString(R.string.alert_calculateBMI))
+                .show()
+        }
+        return bmi
+    }
 
-        save()
+    //小数点以下の文字数取得
+    private fun numberDecimalPlaces(double:Double):Int{
+        val str = double.toString()
+        if(!str.contains(".")){
+            return 0
+        }
+        return str.split(".")[1].length
     }
 
     //保存処理
@@ -63,5 +88,21 @@ class InputFragment : Fragment() {
             putString(inputDate+"Weight",inputWeight.text.toString())
             putString(inputDate+"Excuse",inputExcuse.text.toString())
         }
+    }
+
+    //削除処理
+    private fun delete(){
+        val pref = PreferenceManager.getDefaultSharedPreferences(context)
+
+        pref.edit {
+            val inputDate:String = SimpleDateFormat("yyyyMMdd").format(Date())
+            remove(inputDate+"Height")
+            remove(inputDate+"Weight")
+            remove(inputDate+"Excuse")
+        }
+
+        inputHeight.setText("")
+        inputWeight.setText("")
+        inputExcuse.setText("")
     }
 }

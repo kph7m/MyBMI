@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemDate" />
+        app:layout_constraintTop_toBottomOf="@+id/itemExcuse" />
 
     <TextView
         android:id="@+id/itemDate"
@@ -58,6 +58,18 @@
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/labelBMIDelimit"
         app:layout_constraintTop_toTopOf="@+id/itemDate" />
+
+    <TextView
+        android:id="@+id/itemExcuse"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_below="@+id/itemDate"
+        android:layout_marginTop="4dp"
+        android:text="今日のご飯は、カレーライス、とんかつ、寿司、チャーハン、カレーライス！"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/itemDate"
+        app:layout_constraintTop_toBottomOf="@+id/itemDate" />
 
     <TextView
         android:id="@+id/labelDate"

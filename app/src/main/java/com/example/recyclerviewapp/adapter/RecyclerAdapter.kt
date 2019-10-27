@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mybmi.R
 import com.example.recyclerviewapp.model.RecyclerState
+import com.example.recyclerviewapp.viewholder.BodyExcuseViewHolder
 import com.example.recyclerviewapp.viewholder.BodyViewHolder
 import com.example.recyclerviewapp.viewholder.SectionViewHolder
 
@@ -24,6 +25,11 @@ class RecyclerAdapter(
                 val view = LayoutInflater.from(context).inflate(R.layout.list_body, parent, false)
                 BodyViewHolder(view)
             }
+            //TODO　検討中：RecyclerType.BODY_EXCUSEじゃなくてitemExcuseがブランクかどうかで判断した方が良い？  RecyclerTypeで判断できるのはそれはそれでメリットな気もするけど…。
+            RecyclerType.BODY_EXCUSE -> {
+                val view = LayoutInflater.from(context).inflate(R.layout.list_body_excuse, parent, false)
+                BodyExcuseViewHolder(view)
+            }
             //存在しないケース
             else -> {
                 val view = LayoutInflater.from(context).inflate(R.layout.list_body, parent, false)
@@ -38,6 +44,12 @@ class RecyclerAdapter(
                 viewHolder.monthTextView.text = states[position].month
             }
             is BodyViewHolder ->{
+                viewHolder.itemDateTextView.text = states[position].itemDate
+                viewHolder.itemHeightTextView.text = states[position].itemHeight
+                viewHolder.itemWeightTextView.text = states[position].itemWeight
+                viewHolder.itemBMITextView.text = states[position].itemBMI
+            }
+            is BodyExcuseViewHolder ->{
                 viewHolder.itemDateTextView.text = states[position].itemDate
                 viewHolder.itemHeightTextView.text = states[position].itemHeight
                 viewHolder.itemWeightTextView.text = states[position].itemWeight

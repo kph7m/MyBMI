@@ -15,7 +15,12 @@
     <string name="text_textYourBMI2">でした</string>
     <string name="text_defaultYurBMI">20.0</string>
     <string name="hint_inputExcuse">言い訳を書きたければ書いてください</string>
+    <string name="text_labelDate">日</string>
+    <string name="text_textBMI">BMI</string>
+    <string name="text_Delimit">：</string>
+    <string name="text_textMonth">月</string>
+    <string name="text_historyView_title">履歴</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alert_numberDecimalPlaces">身長、体重は小数点第一位まで入力可能です</string>
+    <string name="alert_calculateBMI">身長、体重に数値を入力してください</string>
 </resources>
