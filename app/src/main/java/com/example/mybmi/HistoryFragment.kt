@@ -2,7 +2,7 @@ package com.example.mybmi
 
 
 import android.os.Bundle
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -37,12 +37,6 @@ class HistoryFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_history, container, false)
     }
-
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//
-//        setHistory()
-//    }
 
     //履歴情報の書き出し
     public fun setHistory() {

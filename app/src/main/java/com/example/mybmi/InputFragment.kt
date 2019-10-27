@@ -2,14 +2,13 @@ package com.example.mybmi
 
 
 import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
-import android.preference.PreferenceManager
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.edit
+import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.fragment_input.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,18 +42,19 @@ class InputFragment : Fragment() {
         }
 
         //ボタン押下時の処理追加
-        buttonCalculateBMI.setOnClickListener { this.yourBMI.text = calculateBMI() }
+        buttonCalculateBMI.setOnClickListener { this.yourBMI.text = calculateBMI(true) }
         buttonSave.setOnClickListener { save() }
         buttonDelete.setOnClickListener { delete() }
     }
 
     //BMIの計算
-    private fun calculateBMI():String {
+    private fun calculateBMI(messageFlag:Boolean = false):String {
         var bmi = ""
         try {
             val height: Double = inputHeight.text.toString().toDouble()
             val weight: Double = inputWeight.text.toString().toDouble()
             if(numberDecimalPlaces(height)>1 || numberDecimalPlaces(weight)>1 ){
+                if(messageFlag)
                 AlertDialog.Builder(context)
                     .setMessage(getString(R.string.alert_numberDecimalPlaces))
                     .show()
@@ -62,6 +62,7 @@ class InputFragment : Fragment() {
             }
             bmi = (round((weight / (height / 100) / (height / 100) * 10)) / 10).toString()
         }catch(e:Exception){
+            if(messageFlag)
             AlertDialog.Builder(context)
                 .setMessage(getString(R.string.alert_calculateBMI))
                 .show()
@@ -80,6 +81,15 @@ class InputFragment : Fragment() {
 
     //保存処理
     private fun save(){
+        val saveBMI = calculateBMI()
+        if(!this.yourBMI.text.toString().isNullOrEmpty() &&
+            calculateBMI() != this.yourBMI.text.toString()){
+            AlertDialog.Builder(context)
+                .setMessage(getString(R.string.alert_PleaseCalculateBMI))
+                .show()
+            return
+        }
+
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
 
         pref.edit {

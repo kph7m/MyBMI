@@ -23,4 +23,5 @@
 
     <string name="alert_numberDecimalPlaces">身長、体重は小数点第一位まで入力可能です</string>
     <string name="alert_calculateBMI">身長、体重に数値を入力してください</string>
+    <string name="alert_PleaseCalculateBMI">「BMIを計算する」ボタンを押してください</string>
 </resources>
