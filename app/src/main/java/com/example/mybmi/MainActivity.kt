@@ -1,36 +1,35 @@
 package com.example.mybmi
 
-import android.app.Activity
-import android.app.PendingIntent.getActivity
-import android.content.Context
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.util.Log
-import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_input.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.round
+
+/**
+ * アプリ開始日
+ */
+const val APP_START_DATE = "20190901"//アプリ開始日
+val DATE_FORMAT = SimpleDateFormat("yyyyMMdd", Locale.JAPAN)
+val MONTH_FORMAT = SimpleDateFormat("M", Locale.JAPAN)//前ゼロなし
+val DAY_FORMAT = SimpleDateFormat("d", Locale.JAPAN)//前ゼロなし
 
 class MainActivity : FragmentActivity() {
 //inputアイコンはMITライセンス　：https://icons-for-free.com/user+icon-1320166904740390564/
 //履歴アイコンはCCライセンス　：https://icon-icons.com/ja/%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3/%E5%B1%A4/64757
-//TODO 履歴アイコンはCCライセンスだからアプリとしての公開は控えた方が良い？
+//履歴アイコンはCCライセンスだからアプリとしての公開は控えた方が良い？
+//⇨控えた方がいい
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         //タブの処理追加
-        viewPager.adapter =PagerAdapter(supportFragmentManager, this)
+        viewPager.adapter =PagerAdapter(supportFragmentManager)
         tab.setupWithViewPager(viewPager)
 
         //タブのレイアウト追加
@@ -57,37 +56,31 @@ class MainActivity : FragmentActivity() {
                     }
                     1 -> {
                         //履歴タブへの遷移時　HistoryFragmentの内容を再描画
-                        val v =supportFragmentManager.fragments[1] as HistoryFragment
-                        v.setHistory()
+//                        val v = supportFragmentManager.fragments[1] as HistoryFragment
+//                        v.setHistory()
                     }
                     else -> {
                     }
                 }
             }
-
-
         })
-
-
     }
 }
 
-class PagerAdapter(fm: FragmentManager, context: Context) : FragmentPagerAdapter(fm) {
-
+class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
-        when (position) {
+        return when (position) {
             0 -> {
-                return InputFragment()
+                 InputFragment()
             }
             1 -> {
-                return HistoryFragment()
+                HistoryFragment()
             }
             else -> {
-                return InputFragment()
+                InputFragment()
             }
         }
     }
-
     override fun getCount(): Int {
         return 2
     }
