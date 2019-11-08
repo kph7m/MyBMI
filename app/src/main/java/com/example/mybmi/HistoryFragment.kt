@@ -50,7 +50,6 @@ class HistoryFragment : Fragment() {
             //出力データの読み込み
             val inputHeight= pref.getString(DATE_FORMAT.format(calendar.time) + "Height", "")!!
             if (inputHeight.isEmpty()) {
-                //TODO Loopを抜けるための処理を２回書いてる…。やり方を変えたい
                 calendar.add(Calendar.DATE, 1)
                 continue
             }
@@ -58,12 +57,12 @@ class HistoryFragment : Fragment() {
             val inputExcuse = pref.getString(DATE_FORMAT.format(calendar.time) + "Excuse", "")!!
 
             //Section部の作成
-            getSection(calendar, states)?.let{
+            createSection(calendar, states)?.let{
                 states.add(it)
             }
 
             //Body部の作成
-            states.add(getBody(calendar, inputWeight, inputHeight, inputExcuse))
+            states.add(createBody(calendar, inputWeight, inputHeight, inputExcuse))
 
             calendar.add(Calendar.DATE, 1)
         }
@@ -77,7 +76,7 @@ class HistoryFragment : Fragment() {
     /**
      * Section部の作成
      */
-    private fun getSection(
+    private fun createSection(
         calendar: Calendar,
         states: ArrayList<RecyclerState>
     ):RecyclerState? {
@@ -92,7 +91,7 @@ class HistoryFragment : Fragment() {
     /**
      * Body部の作成
      */
-    private fun getBody(
+    private fun createBody(
         calendar: Calendar,
         inputWeight: String,
         inputHeight: String,
